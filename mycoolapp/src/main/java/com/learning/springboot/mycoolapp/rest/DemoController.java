@@ -10,15 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
     private Coach myCoach;
 
-//    @Autowired
-//    public DemoController(Coach theCoach) {
-//        myCoach = theCoach;
-//    }
 
     @Autowired
-    public void setCoach(@Qualifier("baseballCoach") Coach theCoach) {
+    public DemoController(@Qualifier("cricketCoach") Coach theCoach) {
+        System.out.println("In Constructor: " + getClass().getSimpleName());
         myCoach = theCoach;
     }
+
+//    @Autowired
+//    public void setCoach(@Qualifier("baseballCoach") Coach theCoach) {
+//        myCoach = theCoach;
+//    }
 
     @GetMapping("/dailyworkout")
     String getDailyWorkout() {
