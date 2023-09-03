@@ -14,15 +14,15 @@ public class CricketCoach implements Coach {
         System.out.println("In Constructor: " + getClass().getSimpleName());
     }
 
-    @PostConstruct
-    void doMyStartupStuff() {
-        System.out.println("In doMyStartupStuff(): " + getClass().getSimpleName());
-    }
+//    @PostConstruct
+//    void doMyStartupStuff() {
+//        System.out.println("In doMyStartupStuff(): " + getClass().getSimpleName());
+//    }
 
-    @PreDestroy
-    void doMyCleanupStuff() {
-        System.out.println("In doMyCleanupStuff(): " + getClass().getSimpleName());
-    }
+//    @PreDestroy
+//    void doMyCleanupStuff() {
+//        System.out.println("In doMyCleanupStuff(): " + getClass().getSimpleName());
+//    }
 
     @Override
     public String getDailyWorkout() {
