@@ -26,8 +26,15 @@ public class MycoolappApplication {
 //            createStudent(studentDAO);
 //            createMultipleStudents(studentDAO);
 //            readStudent(studentDAO);
-            queryForStudents(studentDAO);
+//            queryForStudents(studentDAO);
+            queryForStudentsByLastName(studentDAO);
         };
+    }
+
+    private void queryForStudentsByLastName(StudentDAO studentDAO) {
+        var students = studentDAO.findByLastName("Addepalli");
+
+        students.forEach(System.out::println);
     }
 
     private void queryForStudents(StudentDAO studentDAO) {
