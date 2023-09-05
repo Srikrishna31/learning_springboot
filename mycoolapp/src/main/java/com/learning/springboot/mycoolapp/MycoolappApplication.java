@@ -27,8 +27,26 @@ public class MycoolappApplication {
 //            createMultipleStudents(studentDAO);
 //            readStudent(studentDAO);
 //            queryForStudents(studentDAO);
-            queryForStudentsByLastName(studentDAO);
+//            queryForStudentsByLastName(studentDAO);
+            updateStudent(studentDAO);
         };
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        var studentId = 1;
+        System.out.println("Getting student with id: " + studentId);
+        var myStudent = studentDAO.findById(studentId);
+
+        System.out.println("Updating student ...");
+        myStudent.map(s -> {s.setFirstName("Scooby"); return s; });
+
+        myStudent.ifPresentOrElse(
+                s -> {
+                    studentDAO.update(s);
+                    System.out.println("Updated student: " + s);
+                },
+                () -> System.out.println("No student with id: " + studentId +
+                " found"));
     }
 
     private void queryForStudentsByLastName(StudentDAO studentDAO) {
