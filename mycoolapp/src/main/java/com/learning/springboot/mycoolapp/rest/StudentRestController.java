@@ -1,7 +1,9 @@
 package com.learning.springboot.mycoolapp.rest;
 
 import com.learning.springboot.mycoolapp.entity.Student;
+import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,13 +14,23 @@ import java.util.List;
 @RequestMapping("/api")
 public class StudentRestController {
 
-    @GetMapping("/students")
-    List<Student> getStudents() {
-        List<Student> theStudents = new ArrayList<>();
+    private List<Student> theStudents;
+
+    @PostConstruct
+    void loadData() {
+        theStudents = new ArrayList<>();
+
         theStudents.add(new Student("Poornima", "Patel", "abc@gmail.com"));
         theStudents.add(new Student("Mario", "Rossi", "def@gmail.com"));
         theStudents.add(new Student("Mary", "Smith", "ghi@gmail.com"));
-
+    }
+    @GetMapping("/students")
+    List<Student> getStudents() {
         return theStudents;
+    }
+
+    @GetMapping("/students/{studentId}")
+    Student getStudent(@PathVariable int studentId) {
+        return theStudents.get(studentId);
     }
 }
