@@ -20,19 +20,19 @@ public class MycoolappApplication {
     }
 
 
-    @Bean
-    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
-        return runner -> {
-//            createStudent(studentDAO);
-            createMultipleStudents(studentDAO);
-//            readStudent(studentDAO);
-//            queryForStudents(studentDAO);
-//            queryForStudentsByLastName(studentDAO);
-//            updateStudent(studentDAO);
-//            deleteStudent(studentDAO);
-//            deleteAllStudents(studentDAO);
-        };
-    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+//        return runner -> {
+////            createStudent(studentDAO);
+////            createMultipleStudents(studentDAO);
+////            readStudent(studentDAO);
+////            queryForStudents(studentDAO);
+////            queryForStudentsByLastName(studentDAO);
+////            updateStudent(studentDAO);
+////            deleteStudent(studentDAO);
+////            deleteAllStudents(studentDAO);
+//        };
+//    }
 
     private void deleteAllStudents(StudentDAO studentDAO) {
         System.out.println("Deleting all students");
