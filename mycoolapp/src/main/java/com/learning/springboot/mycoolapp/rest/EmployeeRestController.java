@@ -4,9 +4,11 @@ import com.learning.springboot.mycoolapp.dao.EmployeeDAO;
 import com.learning.springboot.mycoolapp.entity.Employee;
 import com.learning.springboot.mycoolapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +49,23 @@ public class EmployeeRestController {
         theEmployee.setId(0);
 
         return employeeService.save(theEmployee);
+    }
+
+    @PutMapping("/employees")
+    Employee updateEmployee(@RequestBody Employee theEmployee) {
+        return employeeService.save(theEmployee);
+    }
+
+    @DeleteMapping("/employees/{employeeId}")
+    String deleteEmployee(@PathVariable int employeeId) {
+        var tempEmployee = employeeService.findById(employeeId);
+
+        if (tempEmployee.isEmpty()) {
+            throw new RuntimeException("Employee id is not found - " + employeeId);
+        }
+
+        employeeService.deleteById(employeeId);
+
+        return "Deleted employee id - " + employeeId;
     }
 }
