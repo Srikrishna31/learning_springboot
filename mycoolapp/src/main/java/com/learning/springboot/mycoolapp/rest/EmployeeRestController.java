@@ -1,6 +1,5 @@
 package com.learning.springboot.mycoolapp.rest;
 
-import com.learning.springboot.mycoolapp.dao.EmployeeDAO;
 import com.learning.springboot.mycoolapp.entity.Employee;
 import com.learning.springboot.mycoolapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
