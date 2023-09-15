@@ -9,35 +9,20 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.client.HttpServerErrorException;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class DemoSecurityConfig {
+
     @Bean
-    InMemoryUserDetailsManager userDetailsManager() {
-        var john  = User.builder()
-                .username("john")
-                .password("{noop}test123")
-                .roles("EMPLOYEE")
-                .build();
-
-        var mary  = User.builder()
-                .username("mary")
-                .password("{noop}test123")
-                .roles("EMPLOYEE", "MANAGER")
-                .build();
-
-
-        var susan  = User.builder()
-                .username("susan")
-                .password("{noop}test123")
-                .roles("EMPLOYEE", "MANAGER", "ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(john, mary, susan);
+    UserDetailsManager userDetailsManager(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
-
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http)  throws  Exception {
         http.authorizeHttpRequests(configurer ->
@@ -58,4 +43,28 @@ public class DemoSecurityConfig {
 
         return http.build();
     }
+
+//    @Bean
+//    InMemoryUserDetailsManager userDetailsManager() {
+//        var john  = User.builder()
+//                .username("john")
+//                .password("{noop}test123")
+//                .roles("EMPLOYEE")
+//                .build();
+//
+//        var mary  = User.builder()
+//                .username("mary")
+//                .password("{noop}test123")
+//                .roles("EMPLOYEE", "MANAGER")
+//                .build();
+//
+//
+//        var susan  = User.builder()
+//                .username("susan")
+//                .password("{noop}test123")
+//                .roles("EMPLOYEE", "MANAGER", "ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(john, mary, susan);
+//    }
 }
